@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:50:11 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/18 18:33:27 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:36:23 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int	photo_init(t_data	*ptr)
 	int	y;
 
 	ptr->wall = mlx_xpm_file_to_image(ptr->mlx_ptr, "./Assets/wall.xpm", &ptr->width, &ptr->height);
-	ptr->player = mlx_xpm_file_to_image(ptr->mlx_ptr
-	, "./Assets/player.xpm", &x, &y);
+	ptr->player = mlx_xpm_file_to_image(ptr->mlx_ptr, "./Assets/player.xpm", &x, &y);
 	ptr->collectible = mlx_xpm_file_to_image(ptr->mlx_ptr, "./Assets/collectible.xpm", &x, &y);
 	ptr->space = mlx_xpm_file_to_image(ptr->mlx_ptr, "./Assets/empty.xpm", &x, &y);
 	ptr->exit = mlx_xpm_file_to_image(ptr->mlx_ptr, "./Assets/exit.xpm", &x, &y);

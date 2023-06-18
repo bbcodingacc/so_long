@@ -6,15 +6,15 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 03:02:37 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/18 20:22:31 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:34:18 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		print_mapxx(char **map)
+int	print_mapxx(char **map)					/////////!!!!!!!!!!!!
 {
-	int i = 0;
+	int	i = 0;
 	int	j = 0;
 	while (map[j])
 	{
@@ -28,13 +28,13 @@ int		print_mapxx(char **map)
 		j++;
 	}
 	return (0);
-}
+}											//!!!!!!!!!!!!!!!!
 
 int	count_object(char c, t_data *s_data, int i, int j)
 {
-	if(c == 'C')
+	if (c == 'C')
 		s_data->c_quantity = s_data->c_quantity + 1;
-	else if(c == 'P')
+	else if (c == 'P')
 	{
 		s_data->player_x = i;
 		s_data->player_y = j;
@@ -107,7 +107,7 @@ int	read_line(char *str, t_data *s_data, int j)
 	return (1);
 }
 
-int get_line_array(t_data *s_data)
+int	get_line_array(t_data *s_data)
 {
 	int		i;
 
@@ -128,7 +128,7 @@ int	get_line(t_data *s_data)
 	int		fd;
 	int		i;
 	int		j;
-		
+
 	i = 0;
 	s_data->c_quantity = 0;
 	s_data->p_quantity = 0;
