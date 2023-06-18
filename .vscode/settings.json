@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "__config": "c",
+        "locale": "c"
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+}
