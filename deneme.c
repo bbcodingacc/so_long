@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:50:11 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/18 17:05:31 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:23:48 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ int	main(int ac, char *av[])
 	photo_init(ptr, img);
 	read_map(av[1], ptr, img);
 	s_data.win_ptr = mlx_new_window(s_data.mlx_ptr, (img->swidth * img->width), (img->sheight * img->height), "so_long");
-	get_line(s_data, img);
-	ft_printf("%s\n", s_data.map[2]);
+	get_line(&s_data, img);
 	mlx_hook(s_data.win_ptr, 17, 0, shutdown, &s_data);
 	mlx_hook(s_data.win_ptr, 2, 1L << 0, keyboard, &s_data);
 	mlx_loop(s_data.mlx_ptr);

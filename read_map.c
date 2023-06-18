@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 03:02:37 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/18 17:19:40 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:32:38 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,24 @@ int		print_mapxx(char **map)
 	return (0);
 }
 
-int	count_object(char c, t_data s_data, int	i, int j)
+int	count_object(char c, t_data *s_data, int i, int j)
 {
-	ft_printf("func control\n");
-	if(c == '0')
-		s_data.c_quantity++;
+	if(c == 'C')
+		s_data->c_quantity++;
 	else if(c == 'P')
 	{
-		s_data.player_x = i;
-		s_data.player_y = j;
+		s_data->player_x = ++i;
+		s_data->player_y = j;
+		s_data->p_quantity = ++s_data->p_quantity;
 	}
-	ft_printf("player_x = %d\n", s_data.player_x);
-	ft_printf("player_y = %d\n", s_data.player_y);
+	ft_printf("p quantitiy = %d\n", s_data->p_quantity);
+	ft_printf("c quantitiy = %d\n", s_data->c_quantity);
+	ft_printf("player_x = %d\n", s_data->player_x);
+	ft_printf("player_y = %d\n", s_data->player_y);
 	return (0);
 }
 
-void	print_wall(t_data s_data, t_img *img, int control)
+void	print_wall(t_data *s_data, t_img *img, int control)
 {
 	static int	i = 0;
 	static int	j = 0;
@@ -53,8 +55,8 @@ void	print_wall(t_data s_data, t_img *img, int control)
 	void		*mlx;
 	void		*win;
 
-	mlx = s_data.mlx_ptr;
-	win = s_data.win_ptr;
+	mlx = s_data->mlx_ptr;
+	win = s_data->win_ptr;
 	if (control == 'P')
 		mlx_put_image_to_window(mlx, win, img->player, i, j);
 	else if (control == '1')
@@ -73,7 +75,7 @@ void	print_wall(t_data s_data, t_img *img, int control)
 	}
 }
 
-int	print_map(char c, t_data s_data, t_img *img)
+int	print_map(char c, t_data *s_data, t_img *img)
 {
 	if (c == '0')
 		print_wall(s_data, img, '0');
@@ -88,40 +90,38 @@ int	print_map(char c, t_data s_data, t_img *img)
 	return (1);
 }
 
-int	read_line(char *str, t_data s_data, t_img *img)
+int	read_line(char *str, t_data *s_data, t_img *img, int j)
 {
 	int	i;
 
 	i = 0;
-	ft_printf("func check\n");
 	while (str[i])
 	{
 		print_map(str[i], s_data, img);
-		//count_object(str[i], s_data, i, j);
+		count_object(str[i], s_data, i, j);
 		i++;
 	}
 	print_wall(s_data, img, -1);
 	return (1);
 }
 
-int	get_line(t_data s_data, t_img *img)
+int	get_line(t_data *s_data, t_img *img)
 {
 	int		fd;
 	int		i;
-	static int x = 0;
-	
+	int		j;
+		
 	i = 0;
-	ft_printf("%s\n", s_data.filename);
-	fd = open(s_data.filename, O_RDONLY);
+	j = 1;
+	fd = open(s_data->filename, O_RDONLY);
 	while (1)
 	{
-		s_data.map[i] = get_next_line(fd);
-		ft_printf("%s\n", s_data.map[i]);
-		if (s_data.map[i] == NULL)
+		s_data->map[i] = get_next_line(fd);
+		if (s_data->map[i] == NULL)
 			break ;
-		read_line(s_data.map[i], s_data, img);
+		read_line(s_data->map[i], s_data, img, j);
 		i++;
+		j++;
 	}
-	ft_printf("end of the get_line\n");
 	return (1);
 }
