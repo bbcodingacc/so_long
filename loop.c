@@ -23,6 +23,8 @@ int keyboard(int keycode, t_data *s_data)
 
 int wall_control(t_data *s_data, int x, int y)
 {
+	ft_printf("p quantitiy = %d\n", s_data->p_quantity);
+	ft_printf("c quantitiy = %d\n", s_data->c_quantity);
 	if(s_data->map[y][x] == '1')
 		return (1);
 	else

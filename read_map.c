@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 03:02:37 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/18 19:21:56 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:22:31 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,15 @@ int		print_mapxx(char **map)
 int	count_object(char c, t_data *s_data, int i, int j)
 {
 	if(c == 'C')
-		s_data->c_quantity++;
+		s_data->c_quantity = s_data->c_quantity + 1;
 	else if(c == 'P')
 	{
 		s_data->player_x = i;
 		s_data->player_y = j;
-		s_data->p_quantity = ++s_data->p_quantity;
+		s_data->p_quantity = s_data->p_quantity + 1;
 	}
 	//ft_printf("p quantitiy = %d\n", s_data->p_quantity);
 	//ft_printf("c quantitiy = %d\n", s_data->c_quantity);
-	ft_printf("player_x = %d\n", s_data->player_x);
-	ft_printf("player_y = %d\n", s_data->player_y);
 	return (0);
 }
 
@@ -108,11 +106,14 @@ int	read_line(char *str, t_data *s_data, int j)
 	print_wall(s_data, -1);
 	return (1);
 }
+
 int get_line_array(t_data *s_data)
 {
 	int		i;
 
 	i = 0;
+	s_data->c_quantity = 0;
+	s_data->p_quantity = 0;
 	print_wall(s_data, -2);
 	while (s_data->map[i])
 	{
@@ -129,6 +130,8 @@ int	get_line(t_data *s_data)
 	int		j;
 		
 	i = 0;
+	s_data->c_quantity = 0;
+	s_data->p_quantity = 0;
 	fd = open(s_data->filename, O_RDONLY);
 	while (1)
 	{
