@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 03:02:37 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/17 00:09:57 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:19:40 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,27 @@ int		print_mapxx(char **map)
 	}
 	return (0);
 }
+
+int	count_object(char c, t_data s_data, int	i, int j)
+{
+	ft_printf("func control\n");
+	if(c == '0')
+		s_data.c_quantity++;
+	else if(c == 'P')
+	{
+		s_data.player_x = i;
+		s_data.player_y = j;
+	}
+	ft_printf("player_x = %d\n", s_data.player_x);
+	ft_printf("player_y = %d\n", s_data.player_y);
+	return (0);
+}
+
 void	print_wall(t_data s_data, t_img *img, int control)
 {
 	static int	i = 0;
 	static int	j = 0;
+	static int	x = 0;
 	void		*mlx;
 	void		*win;
 
@@ -71,21 +88,6 @@ int	print_map(char c, t_data s_data, t_img *img)
 	return (1);
 }
 
-int	count_object(char c, t_data s_data, int	i, int j)
-{
-	ft_printf("func control\n");
-	if(c == '0')
-		s_data.c_quantity++;
-	else if(c == 'P')
-	{
-		s_data.player_x = i;
-		s_data.player_y = j;
-	}
-	ft_printf("player_x = %d\n", s_data.player_x);
-	ft_printf("player_y = %d\n", s_data.player_y);
-	return (0);
-}
-
 int	read_line(char *str, t_data s_data, t_img *img)
 {
 	int	i;
@@ -106,7 +108,7 @@ int	get_line(t_data s_data, t_img *img)
 {
 	int		fd;
 	int		i;
-	char	*line;
+	static int x = 0;
 	
 	i = 0;
 	ft_printf("%s\n", s_data.filename);
@@ -114,11 +116,12 @@ int	get_line(t_data s_data, t_img *img)
 	while (1)
 	{
 		s_data.map[i] = get_next_line(fd);
+		ft_printf("%s\n", s_data.map[i]);
 		if (s_data.map[i] == NULL)
 			break ;
 		read_line(s_data.map[i], s_data, img);
 		i++;
 	}
+	ft_printf("end of the get_line\n");
 	return (1);
 }
-

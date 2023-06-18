@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:50:11 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/16 22:56:39 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:05:31 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	read_map(char *map, t_data *ptr, t_img *img)
 		line = get_next_line(fd);
 		img->sheight = img->sheight + 1;
 	}
-	ft_printf("sheight = %d\n", img->sheight);	//!!!!!!!!!!!!!!!!!!!!!!
-	ft_printf("swidth1 = %d\n", img->swidth); 	//!!!!!!!!!!!!!!!!!!!!!!
 	close (fd);
 	return (1);
 }
@@ -59,15 +57,6 @@ int	photo_init(t_data	*ptr, t_img *p)
 	return (1);
 }
 
-int	error_check(int e)
-{
-	if(e == 30)
-		ft_printf("Map file is invalid (it must be in .ber format)");
-	else if(3 == 31)
-		ft_printf("Error while reading .ber file");
-		
-}
-
 int	main(int ac, char *av[])
 {
 	t_data	s_data;
@@ -82,8 +71,9 @@ int	main(int ac, char *av[])
 	s_data.mlx_ptr = mlx_init();
 	photo_init(ptr, img);
 	read_map(av[1], ptr, img);
-	s_data.win_ptr = mlx_new_window(s_data.mlx_ptr, (img->swidth * img->width), (img->sheight * img->height), "METEHAN");
+	s_data.win_ptr = mlx_new_window(s_data.mlx_ptr, (img->swidth * img->width), (img->sheight * img->height), "so_long");
 	get_line(s_data, img);
+	ft_printf("%s\n", s_data.map[2]);
 	mlx_hook(s_data.win_ptr, 17, 0, shutdown, &s_data);
 	mlx_hook(s_data.win_ptr, 2, 1L << 0, keyboard, &s_data);
 	mlx_loop(s_data.mlx_ptr);

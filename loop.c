@@ -1,12 +1,12 @@
 #include "so_long.h"
 
-int shutdown(t_data s_data)
+int shutdown(t_data *s_data)
 {
     ft_printf("X\n");
     exit(0);
 }
 
-int keyboard(int keycode, t_data s_data)
+int keyboard(int keycode, t_data *s_data)
 {
     if (keycode == 119 || keycode == 13)
                ft_printf("W\n");

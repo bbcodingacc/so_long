@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:25:36 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/16 20:46:17 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:02:06 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ typedef struct s_data // kaynak
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	*filename;
-	char	**map;
 	int		player_x;
 	int		player_y;
 	int 	c_quantity;
+	char	*map[];
 }t_data;
 
 typedef struct	s_img
@@ -46,7 +46,7 @@ typedef struct	s_img
 
 
 int		get_line(t_data s_data, struct s_img *img);
-int		shutdown(t_data s_data);
-int		keyboard(int keycode, t_data s_data);
+int		shutdown(t_data *s_data);
+int		keyboard(int keycode, t_data *s_data);
 
 #endif 
