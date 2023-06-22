@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 03:02:37 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/22 19:18:01 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:30:52 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,27 @@ void	print_wall(t_data *s_data, int control)
 {
 	static int	i = 0;
 	static int	j = 0;
-	void		*mlx;
 	void		*win;
 
-	mlx = s_data->mlx_ptr;
 	win = s_data->win_ptr;
 	if (control == 'P')
-		mlx_put_image_to_window(mlx, win, s_data->player, i, j);
+		mlx_put_image_to_window(s_data->mlx_ptr, win, s_data->player, i, j);
 	else if (control == '1')
-		mlx_put_image_to_window(mlx, win, s_data->wall, i, j);
+		mlx_put_image_to_window(s_data->mlx_ptr, win, s_data->wall, i, j);
 	else if (control == 'C')
-		mlx_put_image_to_window(mlx, win, s_data->collectible, i, j);
+		mlx_put_image_to_window(s_data->mlx_ptr, win, s_data->collec, i, j);
 	else if (control == '0')
-		mlx_put_image_to_window(mlx, win, s_data->space, i, j);
+		mlx_put_image_to_window(s_data->mlx_ptr, win, s_data->space, i, j);
 	else if (control == 'E')
-		mlx_put_image_to_window(mlx, win, s_data->exit, i, j);
+		mlx_put_image_to_window(s_data->mlx_ptr, win, s_data->exit, i, j);
 	i = s_data->width + i;
-	if (control == -1)
+	if (control == -1 || control == -2)
 	{
 		i = 0;
-		j = s_data->width + j;
-	}
-	if (control == -2)
-	{
-		i = 0;
-		j = 0;
+		if (control == -2)
+			j = 0;
+		else
+			j = s_data->width + j;
 	}
 }
 
