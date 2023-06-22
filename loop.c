@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:27:22 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/18 20:32:06 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/22 01:37:30 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	move_x(int keycode, t_data *s_data)
 
 int	action(int keycode, t_data *s_data)
 {
-	keyboard(keycode, s_data);
 	if (keycode == 13 || keycode == 1)
 		move_y(keycode, s_data);
 	else if (keycode == 2 || keycode == 0)
