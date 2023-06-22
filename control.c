@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:08:16 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/22 15:36:54 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:02:02 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,14 @@ size_t	ft_strlenxx(const char *s)
 
 int	frame(t_data *s_data)
 {
-	int		x;
-	int		y;
 	int		i;
 	int		j;
-	
-	y = s_data->sheight - 1;
-	x = s_data->swidth - 1;
+
 	j = 0;
-	while (i <= x)
+	while (i <= s_data->swidth - 1)
 	{
-		if(s_data->map[j][i] != '1' || s_data->map[y][i] != '1')
+		if (s_data->map[j][i] != '1' ||
+		s_data->map[s_data->sheight - 1][i] != '1')
 		{
 			ft_printf("Map must be surrounded with walls !\n");
 			exit (0);
@@ -42,9 +39,10 @@ int	frame(t_data *s_data)
 		i++;
 	}
 	i = 0;
-	while (j <= y)
+	while (j <= s_data->sheight - 1)
 	{
-		if(s_data->map[j][i] != '1' || s_data->map[j][x] != '1')
+		if (s_data->map[j][i] != '1' ||
+		s_data->map[j][s_data->swidth - 1] != '1')
 		{
 			ft_printf("Map must be surrounded with walls !\n");
 			exit (0);
@@ -60,22 +58,21 @@ int	quantity(t_data *s_data)
 		ft_printf("Number of players must be 1\n");
 		exit (0);
 	}
-	else if(s_data->e_quantity != 1)
+	else if (s_data->e_quantity != 1)
 	{
 		ft_printf("Number of exit must be 1\n");
 		exit (0);
 	}
-	else if(s_data->c_quantity <= 0)
+	else if (s_data->c_quantity <= 0)
 	{
 		ft_printf("There are at least one collectible exist in the map\n");
 		exit (0);
 	}
-	
 	frame(s_data);
 	return (0);
 }
 
-int	peconezero(t_data *s_data)
+void	peconezero(t_data *s_data)
 {
 	int		i;
 	int		j;
@@ -99,11 +96,9 @@ int	peconezero(t_data *s_data)
 			}
 			i++;
 		}
-		ft_printf("\n");
 		j++;
 	}
 	quantity(s_data);
-	return (1);
 }
 
 int	rectangular(t_data *s_data)

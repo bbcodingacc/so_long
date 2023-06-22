@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:50:11 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/22 01:47:15 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:35:52 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int ac, char *av[])
 	s_data.win_ptr = mlx_new_window(s_data.mlx_ptr, (ptr->swidth * ptr->width), (ptr->sheight * ptr->height), "so_long");
 	get_line(&s_data);
 	rectangular(&s_data);
+	path_check(&s_data);
 	mlx_hook(s_data.win_ptr, 17, 0, shutdown, &s_data);
 	mlx_hook(s_data.win_ptr, 2, 1L << 0, action, &s_data);
 	mlx_loop(s_data.mlx_ptr);
