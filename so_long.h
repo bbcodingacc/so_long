@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:25:36 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/19 21:20:26 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:26:56 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_data // kaynak
 	int		player_y;
 	int 	c_quantity;
 	int		p_quantity;
+	int		e_quantity;
 
 
 	void	*space;
