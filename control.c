@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:08:16 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/22 19:02:02 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:09:13 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ int	rectangular(t_data *s_data)
 		i++;
 	}
 	peconezero(s_data);
+	last_new_line(s_data);
 	return (1);
 }

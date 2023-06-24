@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 03:02:37 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/22 19:30:52 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:27:24 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	get_line(t_data *s_data)
 	s_data->c_quantity = 0;
 	s_data->p_quantity = 0;
 	s_data->e_quantity = 0;
+	s_data->movement = 0;
 	fd = open(s_data->filename, O_RDONLY);
 	while (1)
 	{

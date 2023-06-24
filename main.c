@@ -6,38 +6,48 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:50:11 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/22 19:35:26 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/24 23:18:47 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+/*
+void	line_lenght(t_data *s_data)
+{
+	int		fd;
+	int		len;
+	char	*line;
 
-int	read_map(char *map, t_data *ptr)
+	fd = open(s_data->filename, O_RDONLY);
+	line = get_next_line(fd);
+	len = ft_strlen(line) - 1;
+	s_data->swidth = len;
+}
+*/
+int	read_map(char *map, t_data *s_data)
 {
 	int		fd;
 	char	*mapo;
 	char	*line;
 
-	ptr->sheight = 0;
-	mapo = ft_strnstr(map + (ft_strlen(map - 4)), ".ber", 5);
-	if (mapo == NULL)
+	s_data->sheight = 0;
+	if (ft_strnstr(map + (ft_strlen(map - 4)), ".ber", 5) == NULL)
 	{
 		ft_printf("Map file is invalid (it must be in .ber format)");
-		return (30);
+		exit (0);
 	}
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_printf("Error while reading .ber file");
-		return (31);
+		exit (0);
 	}
-	ptr->filename = map;
 	line = get_next_line(fd);
-	ptr->swidth = ft_strlen(line) - 1;
+	s_data->swidth = ft_strlen(line) - 1;
 	while (line)
 	{
 		line = get_next_line(fd);
-		ptr->sheight = ptr->sheight + 1;
+		s_data->sheight = s_data->sheight + 1;
 	}
 	close (fd);
 	return (1);
@@ -73,6 +83,7 @@ int	main(int ac, char *av[])
 	s_data.mlx_ptr = mlx_init();
 	photo_init(ptr);
 	read_map(av[1], ptr);
+	s_data.filename = av[1];
 	s_data.win_ptr = mlx_new_window(s_data.mlx_ptr, (ptr->swidth * ptr->width), (ptr->sheight * ptr->height), "so_long");
 	get_line(&s_data);
 	rectangular(&s_data);
