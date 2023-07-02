@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:27:22 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/24 22:28:46 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/30 23:37:33 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int	shutdown(t_data *s_data)
 {
 	ft_printf("X\n");
-	exit(0);
+	ft_exit(s_data);
 }
 
 int	wall_control(t_data *s_data, int x, int y)
 {
-	ft_printf("p quantitiy = %d\n", s_data->p_quantity);
-	ft_printf("c quantitiy = %d\n", s_data->c_quantity);
 	if (s_data->map[y][x] == '1')
 		return (1);
 	else if (s_data->map[y][x] == 'E')
@@ -53,7 +51,7 @@ int	move_y(int keycode, t_data *s_data)
 	if (wall_control(s_data, x, y) == 2)
 	{
 		ft_printf("Movement quantity = %d\n", s_data->movement);
-		exit (0);
+		ft_exit(s_data);
 	}
 	s_data->map[swap][x] = '0';
 	s_data->map[y][x] = 'P';
@@ -82,7 +80,7 @@ int	move_x(int keycode, t_data *s_data)
 	if (wall_control(s_data, x, y) == 2)
 	{
 		ft_printf("Movement quantity = %d\n", s_data->movement);
-		exit (0);
+		ft_exit(s_data);
 	}
 	s_data->map[y][swap] = '0';
 	s_data->map[y][x] = 'P';
@@ -95,12 +93,13 @@ int	move_x(int keycode, t_data *s_data)
 
 int	action(int keycode, t_data *s_data)
 {
+	ft_printf("height = %d\n", s_data->sheight);
 	if (keycode == 13 || keycode == 1)
 		move_y(keycode, s_data);
 	else if (keycode == 2 || keycode == 0)
 		move_x(keycode, s_data);
 	else if (keycode == 53)
-		exit (0);
+		ft_exit(s_data);
 	mlx_clear_window(s_data->mlx_ptr, s_data->win_ptr);
 	get_line_array(s_data);
 	return (0);

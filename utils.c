@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:13:50 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/24 22:29:37 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/29 07:49:30 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,17 @@ int	last_new_line(t_data *s_data)
 	if (s_data->map[y][x] == '\n')
 	{
 		ft_printf("Last line cant be empty\n");
-		exit (0);
+		return (1);
 	}
 	return (0);
+}
+
+size_t	ft_strlenxx(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0' && s[i] != '\n')
+		i++;
+	return (i);
 }

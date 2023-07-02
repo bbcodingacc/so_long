@@ -6,11 +6,37 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 03:02:37 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/24 21:27:24 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/06/30 23:47:07 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int		malloc_map(t_data *s_data)
+{
+	int		i;
+	int		len;
+	int		fd;
+
+	i = 0;
+	fd = open(s_data->filename, O_RDONLY);
+	if(fd == -1)
+		return (0);
+	s_data->map = (char **)malloc((s_data->sheight + 1) * sizeof(char *));
+	if(s_data->map == NULL)
+		return (1);
+	while (i < s_data->sheight)
+	{
+		len = ft_strlen(get_next_line(fd));
+		s_data->map[i] = (char *)malloc(len * sizeof(char));
+		if(s_data->map[i] == NULL)
+			return (1);
+		i++;
+	}
+	s_data->map[i] = NULL;
+	close (fd);
+	return (0);
+}
 
 void	print_wall(t_data *s_data, int control)
 {
@@ -99,7 +125,10 @@ int	get_line(t_data *s_data)
 	s_data->p_quantity = 0;
 	s_data->e_quantity = 0;
 	s_data->movement = 0;
+	malloc_map(s_data);
 	fd = open(s_data->filename, O_RDONLY);
+	if(fd == -1)
+		return (ft_exit(s_data));
 	while (1)
 	{
 		s_data->map[i] = get_next_line(fd);
