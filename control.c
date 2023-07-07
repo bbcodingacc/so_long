@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:08:16 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/07/07 06:01:58 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:42:02 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	frame(t_data *s_data)
 	int		j;
 
 	j = 0;
-	while (i++ <= s_data->swidth - 1)
+	i = -1;
+	while (++i <= s_data->swidth - 1)
 	{
 		if (s_data->map[j][i] != '1' ||
 		s_data->map[s_data->sheight - 1][i] != '1')
@@ -28,7 +29,7 @@ int	frame(t_data *s_data)
 		}
 	}
 	i = 0;
-	while (j <= s_data->sheight - 1)
+	while (++j <= s_data->sheight - 1)
 	{
 		if (s_data->map[j][i] != '1' ||
 		s_data->map[j][s_data->swidth - 1] != '1')
@@ -36,7 +37,6 @@ int	frame(t_data *s_data)
 			ft_printf("Map must be surrounded with walls !\n");
 			return (1);
 		}
-		j++;
 	}
 	return (0);
 }
@@ -93,8 +93,7 @@ int	peconezero(t_data *s_data)
 int	rectangular(t_data *s_data)
 {
 	int		i;
-	int		len;
-	char	*a;
+	unsigned long	len;
 
 	i = 0;
 	len = ft_strlenxx(s_data->map[i]);

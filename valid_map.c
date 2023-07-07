@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:00:39 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/30 23:51:03 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/07 11:33:51 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	**map_dup(t_data *s_data)
 {
 	int		i;
 	int		j;
-	int		x;
 
 	j = 0;
 	s_data->tmp_map = (char **)malloc(s_data->height * sizeof(char *));
@@ -32,6 +31,7 @@ void	**map_dup(t_data *s_data)
 		j++;
 	}
 	s_data->tmp_map[j] = NULL;
+	return (NULL);
 }
 
 void	validmap_check(t_data *s_data, int x, int y)
@@ -63,9 +63,6 @@ void	validmap_check(t_data *s_data, int x, int y)
 
 int	path_check(t_data *s_data)
 {
-	int		i;
-
-	i = 0;
 	map_dup(s_data);
 	s_data->tmp_c_quantity = s_data->c_quantity;
 	s_data->valid_e = 0;

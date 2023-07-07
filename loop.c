@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:27:22 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/07/07 00:39:49 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:03:19 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	shutdown(t_data *s_data)
 {
 	ft_printf("X\n");
 	ft_exit(s_data);
+	return (0);
 }
 
 int	wall_control(t_data *s_data, int x, int y)
@@ -25,7 +26,10 @@ int	wall_control(t_data *s_data, int x, int y)
 	else if (s_data->map[y][x] == 'E')
 	{	
 		if (s_data->c_quantity == 0)
+		{
+			s_data->movement++;
 			return (2);
+		}
 		else
 			return (1);
 	}
@@ -46,13 +50,13 @@ int	move_y(int keycode, t_data *s_data)
 		y = y + 1;
 	else
 		y = y - 1;
-	if (wall_control(s_data, x, y) == 1)
-		return (0);
 	if (wall_control(s_data, x, y) == 2)
 	{
 		ft_printf("Movement quantity = %d\n", s_data->movement);
 		ft_exit(s_data);
 	}
+	if (wall_control(s_data, x, y) == 1)
+		return (0);
 	s_data->map[swap][x] = '0';
 	s_data->map[y][x] = 'P';
 	s_data->player_x = x;
@@ -75,13 +79,13 @@ int	move_x(int keycode, t_data *s_data)
 		x = x - 1;
 	else
 		x = x + 1;
-	if (wall_control(s_data, x, y) == 1)
-		return (0);
 	if (wall_control(s_data, x, y) == 2)
 	{
 		ft_printf("Movement quantity = %d\n", s_data->movement);
 		ft_exit(s_data);
 	}
+	if (wall_control(s_data, x, y) == 1)
+		return (0);
 	s_data->map[y][swap] = '0';
 	s_data->map[y][x] = 'P';
 	s_data->player_x = x;
