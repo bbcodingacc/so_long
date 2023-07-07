@@ -6,11 +6,30 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:50:11 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/07/07 11:34:37 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/07 18:42:47 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	get_s_map(t_data *s_data, int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (line == NULL)
+	{
+		ft_printf("Map cant be empty !\n");
+		exit (0);
+	}
+	s_data->swidth = ft_strlen(line) - 1;
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+		s_data->sheight = s_data->sheight + 1;
+	}
+}
 
 int	file_name(char *str)
 {
@@ -40,14 +59,7 @@ int	read_map(char *map, t_data *s_data)
 		ft_printf("Error while reading .ber file");
 		exit (0);
 	}
-	line = get_next_line(fd);
-	s_data->swidth = ft_strlen(line) - 1;
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-		s_data->sheight = s_data->sheight + 1;
-	}
+	get_s_map(s_data, fd);
 	close (fd);
 	return (1);
 }
