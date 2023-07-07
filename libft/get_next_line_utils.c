@@ -1,122 +1,122 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                             :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydegerli <ydegerli@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: sakkus <sakkus@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 13:38:42 by ydegerli          #+#    #+#             */
-/*   Updated: 2022/12/01 16:38:36 by ydegerli         ###   ########.fr       */
+/*   Created: 2022/09/08 17:38:00 by sakkus            #+#    #+#             */
+/*   Updated: 2022/09/09 21:43:32 by sakkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *str)
 {
-	size_t	i;
+	size_t	c;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	int	j;
-
-	j = 0;
-	if (!s)
-		return (NULL);
-	while (s[j] != (char)c)
-	{
-		if (s[j] == '\0')
-			return (NULL);
-		j++;
-	}
-	return (&((char *)s)[j]);
-}
-
-char	*add(char *s1, char *s2)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	if (!s1)
-	{
-		s1 = (char *)malloc(1);
-		s1[0] = '\0';
-	}
-	if (!s2)
-		return (s1);
-	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2)) + 1);
+	c = 0;
 	if (!str)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-		str[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
+		return (0);
+	while (str[c] != '\0')
+		c++;
+	return (c);
 }
 
-char	*line(char *str)
+char	*ft_strjoin(char *str, char *buff)
 {
-	char	*r;
+	size_t	c;
+	size_t	i;
+	char	*pstr;
+
+	if (!str)
+	{
+		str = (char *)malloc(sizeof(char));
+		str[0] = '\0';
+	}
+	if (!str || !buff)
+		return (NULL);
+	pstr = malloc(sizeof(char) * ((ft_strlen(str)) + ft_strlen(buff) + 1));
+	if (pstr == NULL)
+		return (NULL);
+	c = -1;
+	i = 0;
+	if (str)
+		while (str[++c] != '\0')
+			pstr[c] = str[c];
+	while (buff[i] != '\0')
+		pstr[c++] = buff[i++];
+	pstr[ft_strlen(str) + ft_strlen(buff)] = '\0';
+	free(str);
+	return (pstr);
+}
+
+char	*ft_strchr(char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	if (c == '\0')
+		return ((char *)&str[ft_strlen(str)]);
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+			return ((char *)&str[i]);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_get_line(char *str)
+{
 	int		i;
+	char	*my_line;
 
 	i = 0;
 	if (!str[i])
 		return (NULL);
-	while (str[i] != '\n' && str[i])
+	while (str[i] && str[i] != '\n')
 		i++;
-	r = (char *)malloc(i + 2);
-	if (!r)
+	my_line = (char *)malloc(sizeof(char) * (i + 2));
+	if (!my_line)
 		return (NULL);
 	i = 0;
-	while (str[i] != '\n' && str[i])
+	while (str[i] && str[i] != '\n')
 	{
-		r[i] = str[i];
+		my_line[i] = str[i];
 		i++;
 	}
 	if (str[i] == '\n')
-	{
-		r[i] = str[i];
-		i++;
-	}
-	r[i] = '\0';
-	return (r);
+		my_line[i++] = '\n';
+	my_line[i] = '\0';
+	return (my_line);
 }
 
-char	*next(char *s)
+char	*ft_last_str(char *str)
 {
-	char	*new;
+	int		c;
 	int		i;
-	int		j;
+	char	*my_line;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\n' && s[i])
-		i++;
-	if (!s[i])
+	c = 0;
+	while (str[c] && str[c] != '\n')
+		c++;
+	if (!str[c])
 	{
-		free(s);
+		free(str);
 		return (NULL);
 	}
-	new = (char *)malloc((ft_strlen(s) - i) + 1);
-	if (!new)
+	my_line = (char *)malloc(sizeof(char) * (ft_strlen(str) - c + 1));
+	if (!my_line)
 		return (NULL);
-	i++;
-	j = 0;
-	while (s[i])
-		new[j++] = s[i++];
-	new[j] = '\0';
-	free(s);
-	return (new);
+	c++;
+	i = 0;
+	while (str[c])
+		my_line[i++] = str[c++];
+	my_line[i] = '\0';
+	free(str);
+	return (my_line);
 }

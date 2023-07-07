@@ -3,52 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: sakkus <sakkus@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 13:38:20 by ydegerli          #+#    #+#             */
-/*   Updated: 2023/03/06 15:03:47 by mkarabog         ###   ########.fr       */
+/*   Created: 2022/09/08 17:24:32 by sakkus            #+#    #+#             */
+/*   Updated: 2022/09/09 21:37:22 by sakkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*scan(int fd, char *s)
+char	*ft_buff(int fd, char *str)
 {
-	char	*l;
-	int		lw;
+	int		rd_bytes;
+	char	*buff;
 
-	l = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!l)
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
 		return (NULL);
-	lw = 1;
-	while (lw != 0 && !ft_strchr(s, '\n'))
+	rd_bytes = 1;
+	while (!ft_strchr(str, '\n') && rd_bytes != 0)
 	{
-		lw = read(fd, l, BUFFER_SIZE);
-		if (lw == -1)
+		rd_bytes = read(fd, buff, BUFFER_SIZE);
+		if (rd_bytes == -1)
 		{
-			free(l);
+			free(str);
+			free(buff);
 			return (NULL);
 		}
-		l[lw] = 0;
-		s = add(s, l);
-		if (!s)
-			return (NULL);
+		buff[rd_bytes] = '\0';
+		str = ft_strjoin(str, buff);
 	}
-	free(l);
-	return (s);
+	free(buff);
+	return (str);
 }
 
 char	*get_next_line(int fd)
-{
-	static char	*stc;
-	char		*str;
+{	
+	char		*line;	
+	static char	*str;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stc = scan(fd, stc);
-	if (!stc)
+	str = ft_buff(fd, str);
+	if (!str)
 		return (NULL);
-	str = line(stc);
-	stc = next(stc);
-	return (str);
+	line = ft_get_line(str);
+	str = ft_last_str(str);
+	return (line);
 }

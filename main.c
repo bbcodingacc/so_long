@@ -6,20 +6,32 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:50:11 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/29 20:05:13 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/07 06:12:09 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+int	file_name(char *str)
+{
+	int	i;
+	int	len;
+
+	len = ft_strlen(str);
+	i = 0;
+	if (str[len - 4] == '.' && str[len - 3] == 'b' && str[len - 2] == 'e'
+		&& str[len - 1] == 'r')
+		return (0);
+	return (1);
+}
+
 int	read_map(char *map, t_data *s_data)
 {
 	int		fd;
-	char	*mapo;
 	char	*line;
 
 	s_data->sheight = 0;
-	if (ft_strnstr(map + (ft_strlen(map - 4)), ".ber", 5) == NULL)
+	if (file_name(map) == 1)
 	{
 		ft_printf("Map file is invalid (it must be in .ber format)");
 		exit (0);
@@ -34,6 +46,7 @@ int	read_map(char *map, t_data *s_data)
 	s_data->swidth = ft_strlen(line) - 1;
 	while (line)
 	{
+		free(line);
 		line = get_next_line(fd);
 		s_data->sheight = s_data->sheight + 1;
 	}
@@ -71,8 +84,10 @@ int	main(int ac, char *av[])
 	photo_init(ptr);
 	read_map(av[1], ptr);
 	s_data.filename = av[1];
-	s_data.win_ptr = mlx_new_window(s_data.mlx_ptr, (ptr->swidth * ptr->width), (ptr->sheight * ptr->height), "so_long");
+	s_data.win_ptr = mlx_new_window(s_data.mlx_ptr, (ptr->swidth * ptr->width),
+			(ptr->sheight * ptr->height), "so_long");
 	get_line(&s_data);
+	print_mapxx(s_data.map);
 	control_all(&s_data);
 	mlx_hook(s_data.win_ptr, 17, 0, shutdown, &s_data);
 	mlx_hook(s_data.win_ptr, 2, 1L << 0, action, &s_data);

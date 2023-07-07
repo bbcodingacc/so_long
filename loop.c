@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:27:22 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/30 23:37:33 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/07 00:39:49 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	move_x(int keycode, t_data *s_data)
 
 int	action(int keycode, t_data *s_data)
 {
-	ft_printf("height = %d\n", s_data->sheight);
 	if (keycode == 13 || keycode == 1)
 		move_y(keycode, s_data);
 	else if (keycode == 2 || keycode == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydegerli <ydegerli@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: sakkus <sakkus@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 16:33:41 by ydegerli          #+#    #+#             */
-/*   Updated: 2022/12/01 16:34:20 by ydegerli         ###   ########.fr       */
+/*   Created: 2022/09/09 21:37:46 by sakkus            #+#    #+#             */
+/*   Updated: 2022/09/09 21:40:05 by sakkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,13 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# define BUFFER_SIZE 1
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-size_t	ft_strlen(const char *s);
-
-char	*ft_strchr(const char *s, int c);
-
-char	*add(char *s1, char *s2);
-
-char	*scan(int fd, char *s);
-
-char	*line(char *str);
-
-char	*next(char *s);
-
+size_t	ft_strlen(char *str);
+char	*ft_buff(int fd, char *str);
 char	*get_next_line(int fd);
-
+char	*ft_strjoin(char *str, char *buff);
+char	*ft_strchr(char *str, int c);
+char	*ft_get_line(char *str);
+char	*ft_last_str(char *str);
 #endif

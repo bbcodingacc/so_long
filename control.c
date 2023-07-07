@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:08:16 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/06/29 20:13:41 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/07 06:01:58 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	frame(t_data *s_data)
 	int		j;
 
 	j = 0;
-	while (i <= s_data->swidth - 1)
+	while (i++ <= s_data->swidth - 1)
 	{
 		if (s_data->map[j][i] != '1' ||
 		s_data->map[s_data->sheight - 1][i] != '1')
@@ -26,7 +26,6 @@ int	frame(t_data *s_data)
 			ft_printf("Map must be surrounded with walls !\n");
 			return (1);
 		}
-		i++;
 	}
 	i = 0;
 	while (j <= s_data->sheight - 1)
@@ -111,14 +110,15 @@ int	rectangular(t_data *s_data)
 	return (0);
 }
 
-int control_all(t_data *s_data)
+int	control_all(t_data *s_data)
 {
 	int		status;
-	
-	if(rectangular(s_data) || peconezero(s_data) || quantity(s_data) || frame(s_data) || last_new_line(s_data))
+
+	if (rectangular(s_data) || peconezero(s_data) || quantity(s_data)
+		|| frame(s_data) || last_new_line(s_data))
 		ft_exit(s_data);
 	status = path_check(s_data);
-	if(status == 1)
+	if (status == 1)
 		ft_exit(s_data);
 	return (0);
 }
