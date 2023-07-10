@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:08:16 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/07/07 12:42:02 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/10 09:15:48 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	peconezero(t_data *s_data)
 
 int	rectangular(t_data *s_data)
 {
-	int		i;
+	int				i;
 	unsigned long	len;
 
 	i = 0;

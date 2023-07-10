@@ -3,25 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakkus <sakkus@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 21:37:46 by sakkus            #+#    #+#             */
-/*   Updated: 2022/09/09 21:40:05 by sakkus           ###   ########.fr       */
+/*   Created: 2023/02/04 12:12:07 by mkarabog          #+#    #+#             */
+/*   Updated: 2023/02/04 13:08:57 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdlib.h>
 # include <unistd.h>
-# define BUFFER_SIZE 1
+# include <stdlib.h>
 
-size_t	ft_strlen(char *str);
-char	*ft_buff(int fd, char *str);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *str, char *buff);
-char	*ft_strchr(char *str, int c);
-char	*ft_get_line(char *str);
-char	*ft_last_str(char *str);
+char	*scan(int fd, char *res);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*join(char *s1, char *s2);
+char	*get_linex(char *str);
+char	*next_line(char *str);
+
 #endif

@@ -3,51 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakkus <sakkus@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 17:24:32 by sakkus            #+#    #+#             */
-/*   Updated: 2022/09/09 21:37:22 by sakkus           ###   ########.fr       */
+/*   Created: 2023/02/04 11:54:10 by mkarabog          #+#    #+#             */
+/*   Updated: 2023/02/04 13:49:53 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_buff(int fd, char *str)
+char	*scan(int fd, char *res)
 {
-	int		rd_bytes;
-	char	*buff;
+	int		size;
+	char	*str;
 
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buff)
+	str = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
-	rd_bytes = 1;
-	while (!ft_strchr(str, '\n') && rd_bytes != 0)
+	size = 1;
+	while (size > 0 && !ft_strchr(res, '\n'))
 	{
-		rd_bytes = read(fd, buff, BUFFER_SIZE);
-		if (rd_bytes == -1)
+		size = read(fd, str, BUFFER_SIZE);
+		if (size == -1)
 		{
 			free(str);
-			free(buff);
+			free(res);
 			return (NULL);
 		}
-		buff[rd_bytes] = '\0';
-		str = ft_strjoin(str, buff);
+		str[size] = 0;
+		res = join(res, str);
+		if (!res)
+			return (NULL);
 	}
-	free(buff);
-	return (str);
+	free(str);
+	return (res);
 }
 
 char	*get_next_line(int fd)
-{	
-	char		*line;	
-	static char	*str;
+{
+	static char		*bufferc;
+	char			*str;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	str = ft_buff(fd, str);
-	if (!str)
+	bufferc = scan(fd, bufferc);
+	if (bufferc == NULL)
 		return (NULL);
-	line = ft_get_line(str);
-	str = ft_last_str(str);
-	return (line);
+	str = get_linex(bufferc);
+	bufferc = next_line(bufferc);
+	return (str);
 }

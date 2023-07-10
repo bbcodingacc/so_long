@@ -6,7 +6,7 @@
 /*   By: mkarabog <mkarabog@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:13:50 by mkarabog          #+#    #+#             */
-/*   Updated: 2023/07/07 06:10:36 by mkarabog         ###   ########.fr       */
+/*   Updated: 2023/07/10 09:21:15 by mkarabog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	malloc_map(t_data *s_data)
 	int		fd;
 	char	*str;
 
-	i = 0;
+	i = -1;
 	fd = open(s_data->filename, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	s_data->map = (char **)malloc((s_data->sheight + 1) * sizeof(char *));
 	if (s_data->map == NULL)
 		return (1);
-	while (i < s_data->sheight)
+	while (++i < s_data->sheight)
 	{
 		str = get_next_line(fd);
 		len = ft_strlen(str);
@@ -34,7 +34,7 @@ int	malloc_map(t_data *s_data)
 		free(str);
 		if (s_data->map[i] == NULL)
 			return (1);
-		i++;
+		ft_bzero(s_data->map[i], (len + 1));
 	}
 	s_data->map[i] = NULL;
 	close (fd);
